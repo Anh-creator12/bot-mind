@@ -49,26 +49,34 @@ client.on('messageCreate', async (message) => {
 // Xử lý tạo kênh
 client.on('interactionCreate', async (interaction) => {
     if (!interaction.isButton()) return;
-const STAFF_ROLE_IDS = ['1496507777781203104', '1516479524370382974'];
+
+    // KHAI BÁO BIẾN Ở ĐÂY (Thay ID thật của bạn vào)
+    const STAFF_ROLE_ID = '1496507777781203104'; 
+
     const instructions = {
-        'ticket_support': 'Chào bạn, Staff sẽ hỗ trợ bạn sớm nhất.',
-        'ticket_apply': 'Hãy điền mẫu: 1. Tên, 2. Kinh nghiệm, 3. Lý do tham gia?',
+        'ticket_support': 'Chào bạn, Staff sẽ sớm hỗ trợ bạn nhé.',
+        'ticket_apply': 'Chào bạn, hãy điền mẫu: 1. Tên, 2. Kinh nghiệm, 3. Lý do tham gia?',
         'ticket_donate': 'Cảm ơn bạn đã muốn Donate!',
-        'ticket_partner': 'Vui lòng cho biết thông tin đối tác của bạn.'
+        'ticket_partner': 'Vui lòng cung cấp thông tin liên hệ.'
     };
 
-    const channel = await interaction.guild.channels.create({
-        name: `${interaction.user.username}-ticket`,
-        type: ChannelType.GuildText,
-        permissionOverwrites: [
-            { id: interaction.guild.id, deny: [PermissionFlagsBits.ViewChannel] },
-            { id: interaction.user.id, allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages] },
-            { id: STAFF_ROLE_ID, allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages] }
-        ],
-    });
+    try {
+        const channel = await interaction.guild.channels.create({
+            name: `${interaction.user.username}-ticket`,
+            type: ChannelType.GuildText,
+            permissionOverwrites: [
+                { id: interaction.guild.id, deny: [PermissionFlagsBits.ViewChannel] },
+                { id: interaction.user.id, allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages] },
+                { id: STAFF_ROLE_ID, allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages] }
+            ],
+        });
 
-    await channel.send(`${interaction.user}, ${instructions[interaction.customId] || 'Chào bạn!'}`);
-    await interaction.reply({ content: `Kênh hỗ trợ: ${channel}`, flags: 64 });
+        await channel.send(`${interaction.user}, ${instructions[interaction.customId] || 'Chào bạn!'}`);
+        await interaction.reply({ content: `Kênh đã tạo: ${channel}`, flags: 64 });
+    } catch (error) {
+        console.error(error);
+        await interaction.reply({ content: 'Lỗi tạo kênh, kiểm tra quyền Bot!', flags: 64 });
+    }
 });
 
 client.login(process.env.TOKEN);
