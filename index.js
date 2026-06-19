@@ -78,5 +78,18 @@ client.on('interactionCreate', async (interaction) => {
         await interaction.reply({ content: 'Lỗi tạo kênh, kiểm tra quyền Bot!', flags: 64 });
     }
 });
+client.on('messageCreate', async (message) => {
+    if (message.content.trim() === 'tydc') {
+        const warningText = `**🚫 CẢNH BÁO NGHIÊM TRỌNG TỪ BAN QUẢN LÝ**\n\n` +
+            `Tao nhắc lần cuối cấm TÌNH YÊU DISCORD trong server... [dán nội dung của bạn vào đây]\n\n` +
+            `https://media.discordapp.net/attachments/1517487777716113539/1517495220592312440/image.png?ex=6a367d0e&is=6a352b8e&hm=7ba3dce019fb3329bbc549bd6a5dee85d8eb42b710f30d6d98a7b4822fe45b2c&=&format=webp&quality=lossless&width=648&height=364`;
 
+        try {
+            await message.channel.send({ content: warningText });
+            await message.delete().catch(() => {});
+        } catch (error) {
+            console.error("Lỗi:", error);
+        }
+    }
+});
 client.login(process.env.TOKEN);
