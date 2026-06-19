@@ -11,9 +11,7 @@ client.once('ready', () => {
 // Lệnh gửi bảng Ticket
 client.on('messageCreate', async (message) => {
     if (message.content === '!ticket') {
-        // 1. Gửi video last-train-to-eden.1920x1080.mp4
-        await message.channel.send({ files: ['./last-train-to-eden.1920x1080.mp4'] });
-
+    
         // 2. Gửi bảng Ticket
         const embed = new EmbedBuilder()
     .setTitle('°✩ :𝑴𝒊𝒏𝒅𝒍𝒆𝒔𝒔𝑪𝒍𝒖𝒃:･ ｡⋆ • SOS CENTER 🦋')
