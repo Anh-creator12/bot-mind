@@ -49,7 +49,7 @@ client.on('messageCreate', async (message) => {
 // Xử lý tạo kênh
 client.on('interactionCreate', async (interaction) => {
     if (!interaction.isButton()) return;
-    const STAFF_ROLE_ID = 'ID_CỦA_ROLE_STAFF_Ở_ĐÂY'; 
+const STAFF_ROLE_IDS = ['1496507777781203104', '1516479524370382974'];
     const instructions = {
         'ticket_support': 'Chào bạn, Staff sẽ hỗ trợ bạn sớm nhất.',
         'ticket_apply': 'Hãy điền mẫu: 1. Tên, 2. Kinh nghiệm, 3. Lý do tham gia?',
