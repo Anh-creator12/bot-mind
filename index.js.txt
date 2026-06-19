@@ -1,0 +1,30 @@
+import discord
+from discord.ext import commands
+from discord import app_commands
+
+# Cấu hình bot
+intents = discord.Intents.default()
+intents.message_content = True
+bot = commands.Bot(command_prefix="!", intents=intents)
+
+class TicketView(discord.ui.View):
+    def __init__(self):
+        super().__init__(timeout=None)
+
+    @discord.ui.button(label="Hỗ Trợ", style=discord.ButtonStyle.primary, emoji="🔔")
+    async def ho_tro(self, interaction: discord.Interaction, button: discord.ui.Button):
+        await interaction.response.send_message("Đã tạo kênh hỗ trợ!", ephemeral=True)
+
+    @discord.ui.button(label="Ứng Tuyển", style=discord.ButtonStyle.success, emoji="📝")
+    async def ung_tuyen(self, interaction: discord.Interaction, button: discord.ui.Button):
+        await interaction.response.send_message("Đang mở đơn ứng tuyển cho bạn!", ephemeral=True)
+
+@bot.command()
+async def setup_ticket(ctx):
+    embed = discord.Embed(
+        title="🎫 HỆ THỐNG TICKET - °✩ :𝑴𝒊𝒏𝒅𝒍𝒆𝒔𝒔𝑪𝒍𝒖𝒃:･ ｡⋆",
+        description="Chào mừng bạn đến với hệ thống hỗ trợ! Chọn loại ticket bên dưới để bắt đầu.",
+        color=discord.Color.purple()
+    )
+    await ctx.send(embed=embed, view=TicketView())
+process.env.TOKEN
