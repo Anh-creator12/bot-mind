@@ -79,31 +79,18 @@ client.on('interactionCreate', async (interaction) => {
     }
 });
 client.on('messageCreate', async (message) => {
-    if (message.content.trim() === 'tydc') {
-        // Lệnh tydc sử dụng link ảnh trực tiếp từ Discord
-client.on('messageCreate', async (message) => {
+    // Đảm bảo chỉ xử lý nếu người gửi không phải là bot
+    if (message.author.bot) return;
+
     if (message.content.trim() === 'tydc') {
         const warningText = `**🚫 CẢNH BÁO NGHIÊM TRỌNG TỪ BAN QUẢN LÝ**\n\n` +
-            `Tao nhắc lần cuối cấm TÌNH YÊU DISCORD trong server, đã có rất nhiều người yêu xong out server và làm sv bị thiếu hụt mem thậm chí mất mem quan trọng! Điều này không chỉ ảnh hưởng đến cá nhân hai bên mà ảnh hưởng đến TẬP THỂ CẢ SERVER.\n\n` +
-            `T không muốn nhắc thêm 1 lần nào nữa vì đã quá đáng lắm rồi? Yêu đương ra ngoài chém nhau offline hay sao yêu trên mạng cũng phải offline mxh. Tụi bây có não không!? \n\n` +
-            `https://media.discordapp.net/attachments/1517487777716113539/1517495220592312440/image.png?ex=6a367d0e&is=6a352b8e&hm=7ba3dce019fb3329bbc549bd6a5dee85d8eb42b710f30d6d98a7b4822fe45b2c&=&format=webp&quality=lossless&width=648&height=364`;
+            `[Tao nhắc lần cuối cấm TÌNH YÊU DISCORD trong server, đã có rất nhiều người yêu xong out server và làm sv bị thiếu hụt mem thậm chí mất mem quan trọng! Điều này không chỉ ảnh hưởng đến cá nhân hai bên mà ảnh hưởng đến TẬP THỂ CẢ SERVER.
 
-        try {
-            await message.channel.send({ content: warningText });
-            // Xóa tin nhắn lệnh 'tydc' của người dùng cho sạch
-            await message.delete().catch(() => {});
-        } catch (error) {
-            console.error("Lỗi khi gửi lệnh tydc:", error);
-        }
-    }
-});
+T không muốn nhắc thêm 1 lần nào nữa vì đã quá đáng lắm rồi? Yêu đương ra ngoài chém nhau offline hay sao yêu trên mạng cũng phải offline mxh. Tụi bây có não không!? ]\n\n` +
+            `https://media.discordapp.net/attachments/1517487777716113539/1517495220592312440/image.png?...`;
 
-        try {
-            await message.channel.send({ content: warningText });
-            await message.delete().catch(() => {});
-        } catch (error) {
-            console.error("Lỗi:", error);
-        }
+        await message.channel.send({ content: warningText });
+        await message.delete().catch(() => {});
     }
 });
 client.login(process.env.TOKEN);
