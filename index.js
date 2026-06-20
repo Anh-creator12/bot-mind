@@ -1,22 +1,15 @@
 const { Client, GatewayIntentBits, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, ChannelType, PermissionFlagsBits } = require('discord.js');
-const client = new Client({ const express = require('express');
+const express = require('express');
 
+// Thiết lập Web Server để Render không bị ngủ (24/7)
 const app = express();
-const port = 3000;
+app.get('/', (req, res) => res.send('Bot is running 24/7!'));
+app.listen(3000, () => console.log('Web server đang chạy tại cổng 3000'));
 
-app.get('/', (req, res) => {
-  res.send('Bot is running 24/7!');
-});
-
-app.listen(port, () => {
-  console.log(`Web server đang chạy tại cổng ${port}`);
-});
-
-// 3. KHỞI TẠO BOT (Phần code cũ của bạn bắt đầu từ đây)
+const client = new Client({ 
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] 
 });
 
-// ID Role Staff - Hãy đảm bảo ID này chính xác
 const STAFF_ROLE_ID = '1496507777781203104'; 
 
 client.once('ready', () => {
