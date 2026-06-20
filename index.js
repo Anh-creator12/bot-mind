@@ -1,7 +1,6 @@
 const { Client, GatewayIntentBits, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, ChannelType, PermissionFlagsBits } = require('discord.js');
-const client = new Client({ const express = require('express'); // Thêm dòng này
+const client = new Client({ const express = require('express');
 
-// 2. KHỞI TẠO WEB SERVER (Đặt ở đây)
 const app = express();
 const port = 3000;
 
