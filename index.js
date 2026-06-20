@@ -1,6 +1,19 @@
 const { Client, GatewayIntentBits, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, ChannelType, PermissionFlagsBits } = require('discord.js');
+const client = new Client({ const express = require('express'); // Thêm dòng này
 
-const client = new Client({ 
+// 2. KHỞI TẠO WEB SERVER (Đặt ở đây)
+const app = express();
+const port = 3000;
+
+app.get('/', (req, res) => {
+  res.send('Bot is running 24/7!');
+});
+
+app.listen(port, () => {
+  console.log(`Web server đang chạy tại cổng ${port}`);
+});
+
+// 3. KHỞI TẠO BOT (Phần code cũ của bạn bắt đầu từ đây)
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] 
 });
 
